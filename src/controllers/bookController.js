@@ -10,6 +10,15 @@ const getAllBooks = async (req, res) => {
   }
 }
 
+const getBookById = async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id);
+    res.status(200).json(book);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 const addBook = (req, res) => {
   try {
     const book = new Book(req.body);
@@ -22,5 +31,5 @@ const addBook = (req, res) => {
 
 module.exports = {
   // Add your controller functions here
-  getAllBooks, addBook
+  getAllBooks, addBook, getBookById
 };
